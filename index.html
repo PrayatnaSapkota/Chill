@@ -1,577 +1,184 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Sandhya Bhattarai — In Progress</title>
-
-    <meta name="description"
-        content="The personal portfolio of Sandhya Bhattarai is currently being developed.">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg: #050505;
-            --text: #f4f4f4;
-            --muted: #777;
-            --line: rgba(255,255,255,0.09);
-        }
-
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-        }
-
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family:
-                Inter,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                sans-serif;
-
-            overflow: hidden;
-        }
-
-        /* -------------------------
-           AMBIENT LIGHT
-        ------------------------- */
-
-        .glow {
-            position: fixed;
-            width: 650px;
-            height: 650px;
-            border-radius: 50%;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(255,255,255,0.075),
-                    transparent 65%
-                );
-
-            filter: blur(20px);
-
-            top: 50%;
-            left: 50%;
-
-            transform:
-                translate(-50%, -50%);
-
-            animation: breathing 7s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        @keyframes breathing {
-            0%, 100% {
-                transform:
-                    translate(-50%, -50%)
-                    scale(0.9);
-                opacity: 0.5;
-            }
-
-            50% {
-                transform:
-                    translate(-50%, -50%)
-                    scale(1.15);
-                opacity: 0.85;
-            }
-        }
-
-        /* -------------------------
-           GRID
-        ------------------------- */
-
-        .grid {
-            position: fixed;
-            inset: 0;
-
-            background-image:
-                linear-gradient(
-                    var(--line) 1px,
-                    transparent 1px
-                ),
-                linear-gradient(
-                    90deg,
-                    var(--line) 1px,
-                    transparent 1px
-                );
-
-            background-size: 70px 70px;
-
-            mask-image:
-                radial-gradient(
-                    circle at center,
-                    black 0%,
-                    transparent 75%
-                );
-
-            animation: gridMove 18s linear infinite;
-
-            pointer-events: none;
-        }
-
-        @keyframes gridMove {
-            from {
-                transform: translateY(0);
-            }
-
-            to {
-                transform: translateY(70px);
-            }
-        }
-
-        /* -------------------------
-           NOISE
-        ------------------------- */
-
-        .noise {
-            position: fixed;
-            inset: -50%;
-
-            opacity: 0.035;
-
-            background-image:
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
-
-            animation: noiseMove .25s steps(2) infinite;
-
-            pointer-events: none;
-        }
-
-        @keyframes noiseMove {
-            0% {
-                transform: translate(0,0);
-            }
-
-            25% {
-                transform: translate(2%,-1%);
-            }
-
-            50% {
-                transform: translate(-1%,2%);
-            }
-
-            75% {
-                transform: translate(1%,1%);
-            }
-
-            100% {
-                transform: translate(-2%,-2%);
-            }
-        }
-
-        /* -------------------------
-           MAIN
-        ------------------------- */
-
-        .page {
-            min-height: 100vh;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            position: relative;
-            z-index: 5;
-
-            padding: 30px;
-        }
-
-        .content {
-            width: min(850px, 92vw);
-            text-align: center;
-        }
-
-        /* -------------------------
-           TOP LABEL
-        ------------------------- */
-
-        .eyebrow {
-            font-size: 11px;
-            letter-spacing: 0.32em;
-            text-transform: uppercase;
-
-            color: #666;
-
-            margin-bottom: 28px;
-
-            opacity: 0;
-            transform: translateY(15px);
-
-            animation:
-                fadeUp 1s ease forwards;
-
-            animation-delay: .2s;
-        }
-
-        /* -------------------------
-           NAME
-        ------------------------- */
-
-        .name {
-            font-size: clamp(
-                2.7rem,
-                8vw,
-                7rem
-            );
-
-            line-height: .9;
-
-            font-weight: 600;
-
-            letter-spacing: -0.065em;
-
-            white-space: nowrap;
-
-            opacity: 0;
-            transform: translateY(35px);
-
-            animation:
-                fadeUp 1.2s
-                cubic-bezier(.16,1,.3,1)
-                forwards;
-
-            animation-delay: .4s;
-        }
-
-        /* -------------------------
-           DIVIDER
-        ------------------------- */
-
-        .divider {
-            width: 0;
-            height: 1px;
-
-            background: rgba(255,255,255,.25);
-
-            margin: 38px auto 30px;
-
-            animation:
-                expandLine 1.2s
-                cubic-bezier(.16,1,.3,1)
-                forwards;
-
-            animation-delay: 1s;
-        }
-
-        @keyframes expandLine {
-            to {
-                width: 55px;
-            }
-        }
-
-        /* -------------------------
-           HEADLINE
-        ------------------------- */
-
-        .headline {
-            font-size: clamp(
-                1.4rem,
-                3vw,
-                2.2rem
-            );
-
-            font-weight: 400;
-
-            letter-spacing: -0.025em;
-
-            margin-bottom: 18px;
-
-            opacity: 0;
-            transform: translateY(20px);
-
-            animation:
-                fadeUp 1s
-                cubic-bezier(.16,1,.3,1)
-                forwards;
-
-            animation-delay: 1.15s;
-        }
-
-        .description {
-            max-width: 540px;
-
-            margin: auto;
-
-            color: #777;
-
-            font-size: 15px;
-
-            line-height: 1.8;
-
-            opacity: 0;
-            transform: translateY(20px);
-
-            animation:
-                fadeUp 1s
-                cubic-bezier(.16,1,.3,1)
-                forwards;
-
-            animation-delay: 1.35s;
-        }
-
-        /* -------------------------
-           STATUS
-        ------------------------- */
-
-        .status {
-            display: inline-flex;
-
-            align-items: center;
-
-            gap: 11px;
-
-            margin-top: 38px;
-
-            padding: 11px 17px;
-
-            border: 1px solid
-                rgba(255,255,255,.1);
-
-            border-radius: 100px;
-
-            background:
-                rgba(255,255,255,.025);
-
-            color: #8a8a8a;
-
-            font-size: 10px;
-
-            letter-spacing: .16em;
-
-            text-transform: uppercase;
-
-            backdrop-filter: blur(10px);
-
-            opacity: 0;
-
-            animation:
-                fadeIn 1s ease forwards;
-
-            animation-delay: 1.8s;
-
-            transition: .4s ease;
-        }
-
-        .status:hover {
-            border-color:
-                rgba(255,255,255,.25);
-
-            background:
-                rgba(255,255,255,.06);
-
-            color: #aaa;
-
-            transform: translateY(-2px);
-        }
-
-        .dot {
-            width: 7px;
-            height: 7px;
-
-            border-radius: 50%;
-
-            background: #d5d5d5;
-
-            box-shadow:
-                0 0 0 0
-                rgba(255,255,255,.4);
-
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow:
-                    0 0 0 0
-                    rgba(255,255,255,.35);
-            }
-
-            70% {
-                box-shadow:
-                    0 0 0 7px
-                    rgba(255,255,255,0);
-            }
-
-            100% {
-                box-shadow:
-                    0 0 0 0
-                    rgba(255,255,255,0);
-            }
-        }
-
-        /* -------------------------
-           FOOTER
-        ------------------------- */
-
-        .footer {
-            position: fixed;
-
-            bottom: 27px;
-            left: 0;
-
-            width: 100%;
-
-            text-align: center;
-
-            color: #3f3f3f;
-
-            font-size: 10px;
-
-            letter-spacing: .15em;
-
-            z-index: 10;
-
-            opacity: 0;
-
-            animation:
-                fadeIn 1s ease forwards;
-
-            animation-delay: 2.2s;
-        }
-
-        /* -------------------------
-           ANIMATIONS
-        ------------------------- */
-
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* -------------------------
-           MOBILE
-        ------------------------- */
-
-        @media (max-width: 600px) {
-
-            .name {
-                white-space: normal;
-
-                font-size: 15vw;
-            }
-
-            .description {
-                font-size: 14px;
-            }
-
-            .grid {
-                background-size: 50px 50px;
-            }
-
-            .glow {
-                width: 450px;
-                height: 450px;
-            }
-        }
-
-        /* Reduce animation for users who
-           request reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-
-            *,
-            *::before,
-            *::after {
-                animation-duration: .01ms !important;
-                animation-iteration-count: 1 !important;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandhya Bhattarai — Coming Soon</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Great+Vibes&display=swap');
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    height:100vh; overflow:hidden; display:flex; align-items:center; justify-content:center;
+    background:#0b0618; font-family:'Poppins',sans-serif; color:#fff;
+  }
+
+  /* ---------- animated aurora background ---------- */
+  .aurora { position:fixed; inset:0; z-index:0; overflow:hidden; }
+  .blob { position:absolute; border-radius:50%; filter:blur(90px); opacity:.55; mix-blend-mode:screen; }
+  .b1 { width:55vmax; height:55vmax; background:#ff2e88; top:-20vmax; left:-15vmax; animation:drift1 18s ease-in-out infinite alternate; }
+  .b2 { width:45vmax; height:45vmax; background:#7b2eff; bottom:-18vmax; right:-12vmax; animation:drift2 22s ease-in-out infinite alternate; }
+  .b3 { width:35vmax; height:35vmax; background:#00d4ff; top:40%; left:45%; animation:drift3 20s ease-in-out infinite alternate; }
+  @keyframes drift1 { to { transform:translate(12vmax,10vmax) scale(1.2); } }
+  @keyframes drift2 { to { transform:translate(-10vmax,-12vmax) scale(1.15); } }
+  @keyframes drift3 { to { transform:translate(-14vmax,8vmax) scale(.85); } }
+
+  /* ---------- floating stars ---------- */
+  .star { position:absolute; width:3px; height:3px; border-radius:50%;
+    background:#fff; animation:twinkle var(--d) ease-in-out infinite; }
+  @keyframes twinkle { 0%,100%{opacity:.1; transform:scale(.6)} 50%{opacity:1; transform:scale(1.3)} }
+
+  /* ---------- card ---------- */
+  .card { position:relative; z-index:2; text-align:center; padding:30px; max-width:560px; }
+
+  h1 { font-size:clamp(2rem,6vw,3rem); font-weight:800; letter-spacing:1px;
+    background:linear-gradient(90deg,#ff2e88,#7b2eff,#00d4ff,#ff2e88);
+    background-size:300% 100%; -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent; animation:shine 5s linear infinite; }
+  @keyframes shine { to { background-position:300% 0; } }
+
+  .script { font-family:'Great Vibes',cursive; font-size:1.7rem; color:#ffb3d1; margin-top:4px; }
+
+  /* ---------- glitch COMING SOON ---------- */
+  .soon { margin:24px 0 10px; font-size:clamp(1.1rem,3.5vw,1.5rem); font-weight:600;
+    letter-spacing:8px; color:#fff; position:relative; display:inline-block;
+    animation:flicker 4s infinite; }
+  .soon::before, .soon::after { content:attr(data-text); position:absolute; inset:0; }
+  .soon::before { color:#00d4ff; animation:glitch1 3s infinite linear alternate; }
+  .soon::after { color:#ff2e88; animation:glitch2 2.7s infinite linear alternate; }
+  @keyframes glitch1 { 0%,92%,100%{transform:none; opacity:0}
+    93%{transform:translate(-3px,2px); opacity:.8} 96%{transform:translate(3px,-1px); opacity:.8} }
+  @keyframes glitch2 { 0%,90%,100%{transform:none; opacity:0}
+    91%{transform:translate(3px,1px); opacity:.8} 95%{transform:translate(-2px,-2px); opacity:.8} }
+  @keyframes flicker { 0%,100%{opacity:1} 96%{opacity:1} 97%{opacity:.4} 98%{opacity:1} }
+
+  /* ---------- typewriter ---------- */
+  .typer { min-height:1.8em; color:#b8c1d1; font-size:1rem; }
+  .cursor { display:inline-block; width:2px; background:#ff2e88; animation:blink .8s step-end infinite; }
+  @keyframes blink { 50%{opacity:0} }
+
+  /* ---------- 🔨 NEW: brick-building construction animation ---------- */
+  .build { margin-top:36px; position:relative; height:110px; }
+  .wall { position:absolute; bottom:0; left:50%; transform:translateX(-50%);
+    display:grid; grid-template-columns:repeat(3,44px); gap:5px; }
+  .brick { width:44px; height:22px; border-radius:4px;
+    background:linear-gradient(145deg,#ff5c9e,#c81e5e);
+    box-shadow:0 3px 8px rgba(255,46,136,.4), inset 0 1px 0 rgba(255,255,255,.35);
+    opacity:0; transform:translateY(-46px) rotate(-14deg) scale(.6);
+    animation:drop .45s cubic-bezier(.34,1.56,.64,1) forwards; }
+  .brick:nth-child(3n+2) { background:linear-gradient(145deg,#a06bff,#6a2bd8);
+    box-shadow:0 3px 8px rgba(123,46,255,.4), inset 0 1px 0 rgba(255,255,255,.35); }
+  .brick:nth-child(4) { background:linear-gradient(145deg,#4dd8ff,#0891c9);
+    box-shadow:0 3px 8px rgba(0,212,255,.4), inset 0 1px 0 rgba(255,255,255,.35); }
+  .b1x { animation-delay:.2s } .b2x { animation-delay:.9s } .b3x { animation-delay:1.6s }
+  .b4x { animation-delay:2.3s } .b5x { animation-delay:3s }  .b6x { animation-delay:3.7s }
+  @keyframes drop { to { opacity:1; transform:translateY(0) rotate(0) scale(1); } }
+  .hammer { position:absolute; bottom:46px; left:calc(50% - 115px); font-size:2.1rem;
+    transform-origin:70% 80%; animation:swing 1.15s ease-in-out infinite;
+    filter:drop-shadow(0 0 10px rgba(255,255,255,.35)); }
+  @keyframes swing { 0%,100%{transform:rotate(-28deg)} 50%{transform:rotate(34deg) translate(6px,4px)} }
+  .spark { position:absolute; font-size:.9rem; opacity:0; animation:pop 2.3s ease-out infinite; }
+  .s1 { left:calc(50% - 78px); bottom:56px; animation-delay:.55s; }
+  .s2 { left:calc(50% - 40px); bottom:64px; animation-delay:1.25s; }
+  .s3 { left:calc(50% - 5px);  bottom:60px; animation-delay:1.95s; }
+  .s4 { left:calc(50% + 28px); bottom:56px; animation-delay:2.65s; }
+  @keyframes pop { 0%{opacity:0; transform:scale(.3)} 12%{opacity:1; transform:scale(1.2)}
+    30%{opacity:0; transform:scale(.6) translateY(-14px)} 100%{opacity:0} }
+  .build-label { margin-top:16px; font-size:.72rem; letter-spacing:4px; color:#8b93a8;
+    animation:softblink 2.4s ease-in-out infinite; }
+  @keyframes softblink { 50%{opacity:.45} }
+
+  /* ---------- buttons ---------- */
+  .btns { margin-top:32px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+  .btn { display:inline-flex; align-items:center; gap:9px; padding:13px 26px;
+    border-radius:50px; text-decoration:none; font-weight:600; font-size:.95rem;
+    transition:transform .25s, box-shadow .25s; }
+  .btn svg { width:20px; height:20px; }
+  .btn-ig { background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+    color:#fff; box-shadow:0 6px 25px rgba(220,39,67,.45); }
+  .btn-mail { background:rgba(255,255,255,.08); color:#fff;
+    border:1px solid rgba(255,255,255,.25); backdrop-filter:blur(6px); }
+  .btn:hover { transform:translateY(-5px) scale(1.05); }
+  .btn-ig:hover { box-shadow:0 12px 35px rgba(220,39,67,.65); }
+  .btn-mail:hover { box-shadow:0 10px 30px rgba(255,255,255,.15); }
+
+  .footer { margin-top:32px; font-size:.78rem; color:#6b7891; letter-spacing:1px; }
+</style>
+<base target="_blank">
 </head>
-
 <body>
 
-    <div class="glow"></div>
+  <div class="aurora">
+    <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  </div>
 
-    <div class="grid"></div>
+  <div class="card">
+    <h1>Sandhya Bhattarai</h1>
+    <div class="script">something beautiful is on its way...</div>
 
-    <div class="noise"></div>
+    <div class="soon" data-text="COMING SOON">COMING SOON</div>
 
+    <p class="typer"><span id="typer"></span><span class="cursor">&nbsp;</span></p>
 
-    <main class="page">
+    <!-- 🔨 brick-building animation -->
+    <div class="build">
+      <div class="hammer">🔨</div>
+      <div class="spark s1">✨</div><div class="spark s2">✨</div>
+      <div class="spark s3">✨</div><div class="spark s4">✨</div>
+      <div class="wall">
+        <div class="brick b1x"></div><div class="brick b2x"></div><div class="brick b3x"></div>
+        <div class="brick b4x"></div><div class="brick b5x"></div><div class="brick b6x"></div>
+      </div>
+    </div>
+    <div class="build-label">🚧 BUILDING SOMETHING AMAZING 🚧</div>
 
-        <section class="content">
+    <div class="btns">
+      <a class="btn btn-ig" href="https://instagram.com/sandhyaa_bhattarai06" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 1.8c-3.1 0-3.5 0-4.8.1-1.1.1-1.5.2-1.9.3-.5.2-.8.4-1.1.7-.3.3-.5.6-.7 1.1-.1.4-.3.8-.3 1.9-.1 1.3-.1 1.7-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.5.3 1.9.2.5.4.8.7 1.1.3.3.6.5 1.1.7.4.1.8.3 1.9.3 1.3.1 1.7.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.5-.2 1.9-.3.5-.2.8-.4 1.1-.7.3-.3.5-.6.7-1.1.1-.4.3-.8.3-1.9.1-1.3.1-1.7.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.5-.3-1.9-.2-.5-.4-.8-.7-1.1-.3-.3-.6-.5-1.1-.7-.4-.1-.8-.3-1.9-.3-1.3-.1-1.7-.1-4.8-.1zm0 2.7a5.3 5.3 0 110 10.6 5.3 5.3 0 010-10.6zm0 8.8a3.5 3.5 0 100-7 3.5 3.5 0 000 7zm6.9-8.9a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0z"/></svg>
+        @sandhyaa_bhattarai06
+      </a>
+      <a class="btn btn-mail" href="mailto:sandhyabhattarai1206@gmail.com">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        Email Me
+      </a>
+    </div>
 
-            <div class="eyebrow">
-                Personal Portfolio · 2026
-            </div>
+    <div class="footer">© 2026 Sandhya Bhattarai · All rights reserved</div>
+  </div>
 
-            <h1 class="name">
-                SANDHYA
-            </h1>
+<script>
+  // twinkling stars
+  const aur = document.querySelector('.aurora');
+  for (let i = 0; i < 70; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random()*100 + 'vw';
+    s.style.top  = Math.random()*100 + 'vh';
+    s.style.setProperty('--d', (1.5 + Math.random()*3) + 's');
+    s.style.animationDelay = (Math.random()*3) + 's';
+    const sz = Math.random()*2.5 + 1;
+    s.style.width = s.style.height = sz + 'px';
+    aur.appendChild(s);
+  }
 
-            <div class="divider"></div>
-
-            <h2 class="headline">
-                Something new is taking shape.
-            </h2>
-
-            <p class="description">
-                A personal space for ideas, work,
-                creativity and the journey in between.
-                The portfolio is currently being developed.
-            </p>
-
-            <div class="status">
-                <span class="dot"></span>
-                Currently building
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <footer class="footer">
-        SANDHYA-BHATTARAI.COM.NP
-        <span id="year"></span>
-    </footer>
-
-
-    <script>
-
-        // Dynamic year
-        document.getElementById("year").textContent =
-            " · " + new Date().getFullYear();
-
-
-        // Very subtle cursor-based light movement
-        const glow = document.querySelector(".glow");
-
-        document.addEventListener("mousemove", (event) => {
-
-            const x =
-                (event.clientX / window.innerWidth - 0.5) * 30;
-
-            const y =
-                (event.clientY / window.innerHeight - 0.5) * 30;
-
-            glow.style.marginLeft = `${x}px`;
-            glow.style.marginTop = `${y}px`;
-
-        });
-
-    </script>
-
+  // typewriter
+  const phrases = [
+    "🚧 My website is under construction...",
+    "✨ Something amazing is Coming...",
+    "🌸 Stay tuned, it's worth the wait!",
+    "💌 Reach me on Instagram meanwhile..."
+  ];
+  const el = document.getElementById('typer');
+  let pi = 0, ci = 0, deleting = false;
+  function type() {
+    const p = phrases[pi];
+    el.textContent = p.slice(0, ci);
+    if (!deleting && ci < p.length) { ci++; setTimeout(type, 55); }
+    else if (!deleting) { deleting = true; setTimeout(type, 1800); }
+    else if (ci > 0) { ci--; setTimeout(type, 25); }
+    else { deleting = false; pi = (pi+1) % phrases.length; setTimeout(type, 400); }
+  }
+  type();
+</script>
 </body>
 </html>
-```

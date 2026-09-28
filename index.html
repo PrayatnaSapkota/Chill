@@ -2,183 +2,1329 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+>
+
 <title>Sandhya Bhattarai — Coming Soon</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Great+Vibes&display=swap');
 
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    height:100vh; overflow:hidden; display:flex; align-items:center; justify-content:center;
-    background:#0b0618; font-family:'Poppins',sans-serif; color:#fff;
-  }
+/* =========================================================
+   RESET
+========================================================= */
 
-  /* ---------- animated aurora background ---------- */
-  .aurora { position:fixed; inset:0; z-index:0; overflow:hidden; }
-  .blob { position:absolute; border-radius:50%; filter:blur(90px); opacity:.55; mix-blend-mode:screen; }
-  .b1 { width:55vmax; height:55vmax; background:#ff2e88; top:-20vmax; left:-15vmax; animation:drift1 18s ease-in-out infinite alternate; }
-  .b2 { width:45vmax; height:45vmax; background:#7b2eff; bottom:-18vmax; right:-12vmax; animation:drift2 22s ease-in-out infinite alternate; }
-  .b3 { width:35vmax; height:35vmax; background:#00d4ff; top:40%; left:45%; animation:drift3 20s ease-in-out infinite alternate; }
-  @keyframes drift1 { to { transform:translate(12vmax,10vmax) scale(1.2); } }
-  @keyframes drift2 { to { transform:translate(-10vmax,-12vmax) scale(1.15); } }
-  @keyframes drift3 { to { transform:translate(-14vmax,8vmax) scale(.85); } }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-  /* ---------- floating stars ---------- */
-  .star { position:absolute; width:3px; height:3px; border-radius:50%;
-    background:#fff; animation:twinkle var(--d) ease-in-out infinite; }
-  @keyframes twinkle { 0%,100%{opacity:.1; transform:scale(.6)} 50%{opacity:1; transform:scale(1.3)} }
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
 
-  /* ---------- card ---------- */
-  .card { position:relative; z-index:2; text-align:center; padding:30px; max-width:560px; }
+body {
+    min-height: 100svh;
+    overflow: hidden;
 
-  h1 { font-size:clamp(2rem,6vw,3rem); font-weight:800; letter-spacing:1px;
-    background:linear-gradient(90deg,#ff2e88,#7b2eff,#00d4ff,#ff2e88);
-    background-size:300% 100%; -webkit-background-clip:text; background-clip:text;
-    -webkit-text-fill-color:transparent; animation:shine 5s linear infinite; }
-  @keyframes shine { to { background-position:300% 0; } }
+    font-family: "DM Sans", sans-serif;
+    color: #29242f;
 
-  .script { font-family:'Great Vibes',cursive; font-size:1.7rem; color:#ffb3d1; margin-top:4px; }
+    background:
+        radial-gradient(
+            circle at 50% 44%,
+            rgba(211, 188, 255, 0.42) 0%,
+            rgba(240, 220, 255, 0.23) 20%,
+            transparent 43%
+        ),
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(255, 201, 220, 0.40),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(199, 216, 255, 0.32),
+            transparent 38%
+        ),
+        #faf8fc;
 
-  /* ---------- glitch COMING SOON ---------- */
-  .soon { margin:24px 0 10px; font-size:clamp(1.1rem,3.5vw,1.5rem); font-weight:600;
-    letter-spacing:8px; color:#fff; position:relative; display:inline-block;
-    animation:flicker 4s infinite; }
-  .soon::before, .soon::after { content:attr(data-text); position:absolute; inset:0; }
-  .soon::before { color:#00d4ff; animation:glitch1 3s infinite linear alternate; }
-  .soon::after { color:#ff2e88; animation:glitch2 2.7s infinite linear alternate; }
-  @keyframes glitch1 { 0%,92%,100%{transform:none; opacity:0}
-    93%{transform:translate(-3px,2px); opacity:.8} 96%{transform:translate(3px,-1px); opacity:.8} }
-  @keyframes glitch2 { 0%,90%,100%{transform:none; opacity:0}
-    91%{transform:translate(3px,1px); opacity:.8} 95%{transform:translate(-2px,-2px); opacity:.8} }
-  @keyframes flicker { 0%,100%{opacity:1} 96%{opacity:1} 97%{opacity:.4} 98%{opacity:1} }
+    position: relative;
+}
 
-  /* ---------- typewriter ---------- */
-  .typer { min-height:1.8em; color:#b8c1d1; font-size:1rem; }
-  .cursor { display:inline-block; width:2px; background:#ff2e88; animation:blink .8s step-end infinite; }
-  @keyframes blink { 50%{opacity:0} }
 
-  /* ---------- 🔨 NEW: brick-building construction animation ---------- */
-  .build { margin-top:36px; position:relative; height:110px; }
-  .wall { position:absolute; bottom:0; left:50%; transform:translateX(-50%);
-    display:grid; grid-template-columns:repeat(3,44px); gap:5px; }
-  .brick { width:44px; height:22px; border-radius:4px;
-    background:linear-gradient(145deg,#ff5c9e,#c81e5e);
-    box-shadow:0 3px 8px rgba(255,46,136,.4), inset 0 1px 0 rgba(255,255,255,.35);
-    opacity:0; transform:translateY(-46px) rotate(-14deg) scale(.6);
-    animation:drop .45s cubic-bezier(.34,1.56,.64,1) forwards; }
-  .brick:nth-child(3n+2) { background:linear-gradient(145deg,#a06bff,#6a2bd8);
-    box-shadow:0 3px 8px rgba(123,46,255,.4), inset 0 1px 0 rgba(255,255,255,.35); }
-  .brick:nth-child(4) { background:linear-gradient(145deg,#4dd8ff,#0891c9);
-    box-shadow:0 3px 8px rgba(0,212,255,.4), inset 0 1px 0 rgba(255,255,255,.35); }
-  .b1x { animation-delay:.2s } .b2x { animation-delay:.9s } .b3x { animation-delay:1.6s }
-  .b4x { animation-delay:2.3s } .b5x { animation-delay:3s }  .b6x { animation-delay:3.7s }
-  @keyframes drop { to { opacity:1; transform:translateY(0) rotate(0) scale(1); } }
-  .hammer { position:absolute; bottom:46px; left:calc(50% - 115px); font-size:2.1rem;
-    transform-origin:70% 80%; animation:swing 1.15s ease-in-out infinite;
-    filter:drop-shadow(0 0 10px rgba(255,255,255,.35)); }
-  @keyframes swing { 0%,100%{transform:rotate(-28deg)} 50%{transform:rotate(34deg) translate(6px,4px)} }
-  .spark { position:absolute; font-size:.9rem; opacity:0; animation:pop 2.3s ease-out infinite; }
-  .s1 { left:calc(50% - 78px); bottom:56px; animation-delay:.55s; }
-  .s2 { left:calc(50% - 40px); bottom:64px; animation-delay:1.25s; }
-  .s3 { left:calc(50% - 5px);  bottom:60px; animation-delay:1.95s; }
-  .s4 { left:calc(50% + 28px); bottom:56px; animation-delay:2.65s; }
-  @keyframes pop { 0%{opacity:0; transform:scale(.3)} 12%{opacity:1; transform:scale(1.2)}
-    30%{opacity:0; transform:scale(.6) translateY(-14px)} 100%{opacity:0} }
-  .build-label { margin-top:16px; font-size:.72rem; letter-spacing:4px; color:#8b93a8;
-    animation:softblink 2.4s ease-in-out infinite; }
-  @keyframes softblink { 50%{opacity:.45} }
+/* =========================================================
+   SPACE BACKGROUND
+========================================================= */
 
-  /* ---------- buttons ---------- */
-  .btns { margin-top:32px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
-  .btn { display:inline-flex; align-items:center; gap:9px; padding:13px 26px;
-    border-radius:50px; text-decoration:none; font-weight:600; font-size:.95rem;
-    transition:transform .25s, box-shadow .25s; }
-  .btn svg { width:20px; height:20px; }
-  .btn-ig { background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
-    color:#fff; box-shadow:0 6px 25px rgba(220,39,67,.45); }
-  .btn-mail { background:rgba(255,255,255,.08); color:#fff;
-    border:1px solid rgba(255,255,255,.25); backdrop-filter:blur(6px); }
-  .btn:hover { transform:translateY(-5px) scale(1.05); }
-  .btn-ig:hover { box-shadow:0 12px 35px rgba(220,39,67,.65); }
-  .btn-mail:hover { box-shadow:0 10px 30px rgba(255,255,255,.15); }
+.space {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
 
-  .footer { margin-top:32px; font-size:.78rem; color:#6b7891; letter-spacing:1px; }
+.space::before {
+    content: "";
+
+    position: absolute;
+
+    width: 58vw;
+    height: 58vw;
+
+    max-width: 750px;
+    max-height: 750px;
+
+    left: 50%;
+    top: 47%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(177, 143, 235, 0.22) 0%,
+            rgba(220, 182, 244, 0.12) 30%,
+            transparent 70%
+        );
+
+    filter: blur(18px);
+
+    animation: cosmicPulse 7s ease-in-out infinite;
+}
+
+@keyframes cosmicPulse {
+
+    0%,
+    100% {
+        opacity: .55;
+        transform: translate(-50%, -50%) scale(.94);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.08);
+    }
+}
+
+
+/* =========================================================
+   STARS
+========================================================= */
+
+.stars,
+.stars::before,
+.stars::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+}
+
+.stars {
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(100, 81, 130, .60) 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(120, 94, 150, .38) 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, .95) 1px,
+            transparent 1.5px
+        );
+
+    background-size:
+        150px 150px,
+        230px 230px,
+        310px 310px;
+
+    background-position:
+        20px 40px,
+        90px 130px,
+        40px 80px;
+
+    opacity: .45;
+
+    animation: starDrift 30s linear infinite;
+}
+
+.stars::before {
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(104, 83, 130, .60) 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.80) 1px,
+            transparent 1.5px
+        );
+
+    background-size:
+        190px 190px,
+        280px 280px;
+
+    opacity: .30;
+
+    animation: twinkle 5s ease-in-out infinite alternate;
+}
+
+@keyframes starDrift {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-35px);
+    }
+}
+
+@keyframes twinkle {
+
+    from {
+        opacity: .18;
+    }
+
+    to {
+        opacity: .60;
+    }
+}
+
+
+/* =========================================================
+   SHOOTING STAR
+========================================================= */
+
+.shooting-star {
+
+    position: absolute;
+
+    width: 110px;
+    height: 1px;
+
+    top: 18%;
+    left: -130px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(125, 100, 165, .15),
+            rgba(125, 100, 165, .85)
+        );
+
+    transform: rotate(-32deg);
+
+    opacity: 0;
+
+    animation:
+        shootingStar 9s linear infinite;
+}
+
+.shooting-star::after {
+
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    top: -2px;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 10px rgba(150, 120, 200, .9),
+        0 0 20px rgba(190, 150, 230, .45);
+}
+
+@keyframes shootingStar {
+
+    0%,
+    72% {
+        transform: translate(0, 0) rotate(-32deg);
+        opacity: 0;
+    }
+
+    76% {
+        opacity: 1;
+    }
+
+    86% {
+        transform:
+            translate(115vw, 55vh)
+            rotate(-32deg);
+
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main {
+
+    position: relative;
+    z-index: 5;
+
+    min-height: 100svh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding:
+        40px 24px
+        max(40px, env(safe-area-inset-bottom));
+}
+
+.content {
+
+    width: min(900px, 100%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* =========================================================
+   NAME
+========================================================= */
+
+.name-wrap {
+
+    position: relative;
+
+    margin-bottom: 22px;
+
+    padding: 5px 12px;
+
+    overflow: visible;
+}
+
+.name {
+
+    position: relative;
+
+    font-family: "Manrope", sans-serif;
+
+    font-size:
+        clamp(2rem, 5vw, 4.2rem);
+
+    font-weight: 600;
+
+    letter-spacing: -0.045em;
+
+    line-height: 1.1;
+
+    color: #463951;
+
+    /*
+       Animated cosmic gradient inside text
+    */
+
+    background:
+        linear-gradient(
+            110deg,
+            #47375a 0%,
+            #8e62b3 18%,
+            #d28cb0 35%,
+            #9c78d1 50%,
+            #6c86c9 65%,
+            #c985b0 80%,
+            #47375a 100%
+        );
+
+    background-size: 300% 100%;
+    background-position: 0% 50%;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+
+    opacity: 0;
+
+    transform: translateY(22px);
+
+    animation:
+        nameReveal
+        1.2s
+        cubic-bezier(.16,1,.3,1)
+        .25s
+        forwards,
+
+        nameGradient
+        5.5s
+        ease-in-out
+        1.6s
+        infinite,
+
+        nameGlow
+        4.5s
+        ease-in-out
+        2s
+        infinite;
+}
+
+@keyframes nameReveal {
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes nameGradient {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    25% {
+        background-position: 45% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    75% {
+        background-position: 55% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes nameGlow {
+
+    0%,
+    100% {
+        filter:
+            drop-shadow(
+                0 0 0
+                rgba(170, 130, 215, 0)
+            );
+    }
+
+    50% {
+        filter:
+            drop-shadow(
+                0 0 15px
+                rgba(171, 126, 218, .30)
+            );
+    }
+}
+
+
+/* Bright light sweep across name */
+
+.name-wrap::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+
+    width: 80px;
+
+    left: -100px;
+
+    transform: skewX(-18deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.65),
+            transparent
+        );
+
+    filter: blur(8px);
+
+    pointer-events: none;
+
+    animation:
+        nameSweep
+        5.5s
+        ease-in-out
+        2.2s
+        infinite;
+}
+
+@keyframes nameSweep {
+
+    0%,
+    30% {
+        left: -100px;
+        opacity: 0;
+    }
+
+    40% {
+        opacity: .8;
+    }
+
+    58% {
+        left: calc(100% + 40px);
+        opacity: 0;
+    }
+
+    100% {
+        left: calc(100% + 40px);
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   ORBIT
+========================================================= */
+
+.orbit {
+
+    position: absolute;
+
+    width: min(520px, 72vw);
+
+    aspect-ratio: 2 / 1;
+
+    border:
+        1px solid
+        rgba(135, 110, 165, .17);
+
+    border-radius: 50%;
+
+    transform: rotate(-18deg);
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    animation:
+        orbitAppear
+        1.4s
+        ease
+        1.5s
+        forwards,
+
+        orbitRotate
+        20s
+        linear
+        2s
+        infinite;
+}
+
+.orbit::before,
+.orbit::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 7px;
+    height: 7px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+}
+
+.orbit::before {
+
+    left: -3px;
+
+    background: #b18ad5;
+
+    box-shadow:
+        0 0 14px
+        rgba(177, 138, 213, .8);
+}
+
+.orbit::after {
+
+    right: -3px;
+
+    background: #d99dbd;
+
+    box-shadow:
+        0 0 14px
+        rgba(217, 157, 189, .7);
+}
+
+@keyframes orbitAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            rotate(-18deg)
+            scale(.9);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            rotate(-18deg)
+            scale(1);
+    }
+}
+
+@keyframes orbitRotate {
+
+    from {
+        transform: rotate(-18deg);
+    }
+
+    to {
+        transform: rotate(342deg);
+    }
+}
+
+
+/* =========================================================
+   COMING SOON
+========================================================= */
+
+.coming {
+
+    position: relative;
+
+    font-family: "Manrope", sans-serif;
+
+    font-size:
+        clamp(2.6rem, 8vw, 6.8rem);
+
+    line-height: .95;
+
+    font-weight: 700;
+
+    letter-spacing: -.065em;
+
+    color: #201a28;
+
+    opacity: 0;
+
+    transform:
+        scale(.94)
+        translateY(15px);
+
+    animation:
+        comingReveal
+        1.4s
+        cubic-bezier(.16,1,.3,1)
+        .65s
+        forwards;
+}
+
+.coming::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 125%;
+    height: 180%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(178, 143, 224, .19),
+            rgba(210, 180, 240, .08) 38%,
+            transparent 70%
+        );
+
+    filter: blur(13px);
+
+    z-index: -1;
+
+    animation:
+        comingGlow
+        4s
+        ease-in-out
+        infinite;
+}
+
+@keyframes comingReveal {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            scale(.94)
+            translateY(15px);
+
+        letter-spacing: -.09em;
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+
+        letter-spacing: -.065em;
+    }
+}
+
+@keyframes comingGlow {
+
+    0%,
+    100% {
+
+        opacity: .55;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.92);
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.08);
+    }
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.description {
+
+    margin-top: 25px;
+
+    font-size:
+        clamp(.92rem, 2vw, 1.05rem);
+
+    font-weight: 400;
+
+    color: #756d7d;
+
+    letter-spacing: .01em;
+
+    opacity: 0;
+
+    transform: translateY(12px);
+
+    animation:
+        fadeUp
+        .9s
+        ease
+        1.35s
+        forwards;
+}
+
+
+/* =========================================================
+   SOCIAL BUTTONS
+========================================================= */
+
+.links {
+
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 32px;
+
+    opacity: 0;
+
+    transform: translateY(12px);
+
+    animation:
+        fadeUp
+        .9s
+        ease
+        1.6s
+        forwards;
+}
+
+.link {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    min-width: 130px;
+    min-height: 46px;
+
+    padding: 11px 20px;
+
+    border-radius: 999px;
+
+    text-decoration: none;
+
+    font-size: .88rem;
+    font-weight: 500;
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    transition:
+        transform .3s ease,
+        background .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+}
+
+
+/* =========================================================
+   INSTAGRAM
+========================================================= */
+
+.link.instagram {
+
+    color: #a34b82;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 205, 226, .52),
+            rgba(221, 190, 255, .45)
+        );
+
+    border:
+        1px solid
+        rgba(190, 105, 157, .26);
+}
+
+.link.instagram:hover {
+
+    color: #8e356d;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 190, 218, .72),
+            rgba(210, 174, 250, .65)
+        );
+
+    border-color:
+        rgba(183, 86, 143, .40);
+
+    box-shadow:
+        0 10px 30px
+        rgba(190, 105, 157, .18);
+
+    transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   EMAIL
+========================================================= */
+
+.link.email {
+
+    color: #5576a8;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(204, 222, 255, .54),
+            rgba(224, 210, 255, .45)
+        );
+
+    border:
+        1px solid
+        rgba(100, 130, 190, .25);
+}
+
+.link.email:hover {
+
+    color: #426496;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(190, 216, 255, .72),
+            rgba(215, 198, 255, .65)
+        );
+
+    border-color:
+        rgba(82, 119, 180, .40);
+
+    box-shadow:
+        0 10px 30px
+        rgba(92, 125, 185, .17);
+
+    transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   ICONS
+========================================================= */
+
+.link svg {
+
+    width: 17px;
+    height: 17px;
+
+    flex-shrink: 0;
+}
+
+.instagram-icon {
+
+    fill: currentColor;
+    stroke: none;
+}
+
+.email-icon {
+
+    fill: none;
+    stroke: currentColor;
+}
+
+
+/* Keyboard focus */
+
+.link:focus-visible {
+
+    outline:
+        2px solid
+        rgba(130, 95, 175, .55);
+
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   FADE ANIMATION
+========================================================= */
+
+@keyframes fadeUp {
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    main {
+
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .name-wrap {
+
+        margin-bottom: 18px;
+
+        padding:
+            4px 8px;
+    }
+
+    .name {
+
+        font-size:
+            clamp(
+                1.85rem,
+                8.8vw,
+                3.2rem
+            );
+    }
+
+    .coming {
+
+        font-size:
+            clamp(
+                2.5rem,
+                13vw,
+                4.2rem
+            );
+    }
+
+    .description {
+
+        max-width: 300px;
+
+        line-height: 1.5;
+    }
+
+    .orbit {
+
+        width: 92vw;
+    }
+
+    .links {
+
+        width: 100%;
+
+        max-width: 310px;
+
+        gap: 9px;
+    }
+
+    .link {
+
+        flex: 1;
+
+        min-width: 0;
+
+        padding:
+            10px 15px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .name {
+
+        font-size:
+            1.7rem;
+    }
+
+    .coming {
+
+        font-size:
+            2.35rem;
+    }
+
+    .description {
+
+        font-size:
+            .84rem;
+    }
+
+    .links {
+
+        margin-top: 26px;
+    }
+
+    .link {
+
+        min-height: 44px;
+
+        padding:
+            9px 12px;
+
+        font-size:
+            .80rem;
+    }
+
+    .link svg {
+
+        width: 16px;
+        height: 16px;
+    }
+
+    .orbit {
+
+        width: 105vw;
+    }
+}
+
+
+/* =========================================================
+   SHORT SCREENS
+========================================================= */
+
+@media (max-height: 700px) {
+
+    main {
+
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+
+    .name-wrap {
+
+        margin-bottom: 13px;
+    }
+
+    .description {
+
+        margin-top: 17px;
+    }
+
+    .links {
+
+        margin-top: 22px;
+    }
+
+    .orbit {
+
+        width:
+            min(430px, 72vw);
+    }
+}
+
+
+/* =========================================================
+   LANDSCAPE PHONES
+========================================================= */
+
+@media (orientation: landscape) and (max-height: 500px) {
+
+    body {
+        overflow-y: auto;
+    }
+
+    main {
+
+        min-height: 100svh;
+
+        padding-top: 35px;
+        padding-bottom: 35px;
+    }
+
+    .name {
+
+        font-size: 2rem;
+    }
+
+    .coming {
+
+        font-size: 3.3rem;
+    }
+
+    .description {
+
+        margin-top: 13px;
+    }
+
+    .links {
+
+        margin-top: 18px;
+    }
+
+    .orbit {
+
+        width: 360px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        scroll-behavior:
+            auto !important;
+    }
+}
+
 </style>
-<base target="_blank">
 </head>
+
+
 <body>
 
-  <div class="aurora">
-    <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
-  </div>
 
-  <div class="card">
-    <h1>Sandhya Bhattarai</h1>
-    <div class="script">something beautiful is on its way...</div>
+<!-- =======================================================
+     SPACE BACKGROUND
+======================================================= -->
 
-    <div class="soon" data-text="COMING SOON">COMING SOON</div>
+<div class="space">
 
-    <p class="typer"><span id="typer"></span><span class="cursor">&nbsp;</span></p>
+    <div class="stars"></div>
 
-    <!-- 🔨 brick-building animation -->
-    <div class="build">
-      <div class="hammer">🔨</div>
-      <div class="spark s1">✨</div><div class="spark s2">✨</div>
-      <div class="spark s3">✨</div><div class="spark s4">✨</div>
-      <div class="wall">
-        <div class="brick b1x"></div><div class="brick b2x"></div><div class="brick b3x"></div>
-        <div class="brick b4x"></div><div class="brick b5x"></div><div class="brick b6x"></div>
-      </div>
+    <div class="shooting-star"></div>
+
+</div>
+
+
+<!-- =======================================================
+     MAIN CONTENT
+======================================================= -->
+
+<main>
+
+    <div class="content">
+
+
+        <!-- NAME -->
+
+        <div class="name-wrap">
+
+            <h1 class="name">
+                Sandhya Bhattarai
+            </h1>
+
+        </div>
+
+
+        <!-- ORBIT -->
+
+        <div class="orbit"></div>
+
+
+        <!-- COMING SOON -->
+
+        <div class="coming">
+            COMING SOON
+        </div>
+
+
+        <!-- DESCRIPTION -->
+
+        <p class="description">
+            The website is currently under development.
+        </p>
+
+
+        <!-- SOCIAL LINKS -->
+
+        <div class="links">
+
+
+            <!-- INSTAGRAM -->
+
+            <a
+                class="link instagram"
+                href="https://instagram.com/sandhyaa_bhattarai06"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit Sandhya Bhattarai on Instagram"
+            >
+
+                <svg
+                    class="instagram-icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm8.95 1.35a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0-3.2-3.2Z"
+                    />
+
+                </svg>
+
+                <span>Instagram</span>
+
+            </a>
+
+
+            <!-- EMAIL -->
+
+            <a
+                class="link email"
+                href="mailto:sandhyabhattarai1206@gmail.com"
+                aria-label="Send Sandhya Bhattarai an email"
+            >
+
+                <svg
+                    class="email-icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
+
+                    <rect
+                        x="3"
+                        y="5"
+                        width="18"
+                        height="14"
+                        rx="2"
+                        stroke-width="1.7"
+                    />
+
+                    <path
+                        d="M4 7L12 13L20 7"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+
+                </svg>
+
+                <span>Email</span>
+
+            </a>
+
+
+        </div>
+
     </div>
-    <div class="build-label">🚧 BUILDING SOMETHING AMAZING 🚧</div>
 
-    <div class="btns">
-      <a class="btn btn-ig" href="https://instagram.com/sandhyaa_bhattarai06" target="_blank">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 1.8c-3.1 0-3.5 0-4.8.1-1.1.1-1.5.2-1.9.3-.5.2-.8.4-1.1.7-.3.3-.5.6-.7 1.1-.1.4-.3.8-.3 1.9-.1 1.3-.1 1.7-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.5.3 1.9.2.5.4.8.7 1.1.3.3.6.5 1.1.7.4.1.8.3 1.9.3 1.3.1 1.7.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.5-.2 1.9-.3.5-.2.8-.4 1.1-.7.3-.3.5-.6.7-1.1.1-.4.3-.8.3-1.9.1-1.3.1-1.7.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.5-.3-1.9-.2-.5-.4-.8-.7-1.1-.3-.3-.6-.5-1.1-.7-.4-.1-.8-.3-1.9-.3-1.3-.1-1.7-.1-4.8-.1zm0 2.7a5.3 5.3 0 110 10.6 5.3 5.3 0 010-10.6zm0 8.8a3.5 3.5 0 100-7 3.5 3.5 0 000 7zm6.9-8.9a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0z"/></svg>
-        @sandhyaa_bhattarai06
-      </a>
-      <a class="btn btn-mail" href="mailto:sandhyabhattarai1206@gmail.com">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        Email Me
-      </a>
-    </div>
+</main>
 
-    <div class="footer">© 2026 Sandhya Bhattarai · All rights reserved</div>
-  </div>
 
-<script>
-  // twinkling stars
-  const aur = document.querySelector('.aurora');
-  for (let i = 0; i < 70; i++) {
-    const s = document.createElement('div');
-    s.className = 'star';
-    s.style.left = Math.random()*100 + 'vw';
-    s.style.top  = Math.random()*100 + 'vh';
-    s.style.setProperty('--d', (1.5 + Math.random()*3) + 's');
-    s.style.animationDelay = (Math.random()*3) + 's';
-    const sz = Math.random()*2.5 + 1;
-    s.style.width = s.style.height = sz + 'px';
-    aur.appendChild(s);
-  }
-
-  // typewriter
-  const phrases = [
-    "🚧 My website is under construction...",
-    "✨ Something amazing is Coming...",
-    "🌸 Stay tuned, it's worth the wait!",
-    "💌 Reach me on Instagram meanwhile..."
-  ];
-  const el = document.getElementById('typer');
-  let pi = 0, ci = 0, deleting = false;
-  function type() {
-    const p = phrases[pi];
-    el.textContent = p.slice(0, ci);
-    if (!deleting && ci < p.length) { ci++; setTimeout(type, 55); }
-    else if (!deleting) { deleting = true; setTimeout(type, 1800); }
-    else if (ci > 0) { ci--; setTimeout(type, 25); }
-    else { deleting = false; pi = (pi+1) % phrases.length; setTimeout(type, 400); }
-  }
-  type();
-</script>
 </body>
 </html>
